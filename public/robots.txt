@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.zebulonconsulting.com/sitemap.xml
+Sitemap: https://zebulon.in/sitemap.xml
