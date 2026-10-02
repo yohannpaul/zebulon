@@ -1,92 +1,106 @@
 import Section from "./Section";
-import { GraduationCap, Users, BarChart3, Headphones, BookOpen } from "lucide-react";
+import GradientBackdrop from "./GradientBackdrop";
+import SpotlightCard from "./SpotlightCard";
+import { GraduationCap, Users, Compass } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { staggerContainer, fadeInUp } from "../lib/motion";
 
 export default function Services() {
   const services = [
     {
-      icon: <GraduationCap size={32} className="text-primary-blue" />,
-      title: "Training & Development",
-      description: "Tailored learning programs that improve leadership, soft skills, communication, and team performance.",
+      icon: <GraduationCap size={32} className="text-white group-hover:text-deep-navy transition-colors duration-300" />,
+      image: "/images/learning-illustration.jpg",
+      title: "Learning",
+      description:
+        "Developing people, managers and teams with learning that is practical, relevant and built around real workplace needs.",
+      tags: ["Corporate Training", "Leadership Development", "Workshops", "Coaching"],
+      href: "/learning",
+      linkText: "Explore Learning",
     },
     {
-      icon: <Users size={32} className="text-primary-blue" />,
-      title: "HR Operations",
-      description: "Structured HR support that improves people processes and workforce coordination.",
+      icon: <Users size={32} className="text-white group-hover:text-deep-navy transition-colors duration-300" />,
+      image: "/images/hr-solutions-illustration.jpg",
+      title: "HR Solutions",
+      description:
+        "Practical HR support to help organisations find the right people and put stronger people practices in place.",
+      tags: ["Recruitment", "HR Policies & Process", "Performance Management", "Employee Engagement"],
+      href: "/hr-solutions",
+      linkText: "Explore HR Solutions",
     },
     {
-      icon: <BarChart3 size={32} className="text-primary-blue" />,
-      title: "Digital Marketing",
-      description: "Strategic support to enhance digital visibility, brand presence, and audience engagement.",
+      icon: <Compass size={32} className="text-white group-hover:text-deep-navy transition-colors duration-300" />,
+      image: "/images/people-advisory-illustration.jpg",
+      title: "People Advisory",
+      description:
+        "Helping organisations understand people and performance challenges, identify what needs to change and build the right way forward.",
+      tags: ["L&D Strategy", "Capability Building", "Organisation Development", "Performance Consulting"],
+      href: "/people-advisory",
+      linkText: "Explore People Advisory",
     },
-    {
-      icon: <Headphones size={32} className="text-primary-blue" />,
-      title: "Help Desk Support",
-      description: "Dependable support solutions for smoother internal and customer-facing service experiences.",
-    },
-  ];
-
-  const courses = [
-    { title: "Leadership Excellence", icon: <BookOpen size={24} /> },
-    { title: "HR Strategy", icon: <BookOpen size={24} /> },
-    { title: "Digital Growth", icon: <BookOpen size={24} /> },
   ];
 
   return (
-    <Section id="services">
+    <Section id="services" backdrop={<GradientBackdrop variant="light" />}>
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-bold mb-4">What We Do</h2>
         <p className="text-lg text-deep-navy/60 max-w-2xl mx-auto">
-          Integrated consulting and support services designed to help organizations improve performance and impact.
+          Learning, HR and people advisory solutions built around what your organisation actually needs.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-20">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid md:grid-cols-3 gap-8"
+      >
         {services.map((service, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ y: -10 }}
-            className="bg-white p-10 rounded-[16px] shadow-lg border border-gray-100 group transition-all duration-300 hover:shadow-2xl"
-          >
-            <div className="w-16 h-16 bg-primary-blue/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-              <div className="group-hover:text-white transition-colors">
-                {service.icon}
-              </div>
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-deep-navy">{service.title}</h3>
-            <p className="text-deep-navy/70 leading-relaxed">
-              {service.description}
-            </p>
+          <motion.div key={index} custom={index} variants={fadeInUp} whileHover={{ y: -8 }}>
+            <SpotlightCard color="gold" className="h-full rounded-xl">
+              <Card className="glass group transition-shadow duration-300 hover:shadow-2xl h-full flex flex-col">
+                <img
+                  src={service.image}
+                  alt={`${service.title} illustration`}
+                  className="w-full h-44 object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <CardHeader>
+                  <div className="icon-pop w-16 h-16 bg-primary-blue rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold-accent transition-colors duration-300">
+                    {service.icon}
+                  </div>
+                  <CardTitle className="font-serif text-2xl font-bold text-deep-navy">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1 flex flex-col">
+                  <p className="text-deep-navy/70 leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {service.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="font-normal">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter className="bg-transparent border-none px-6 pb-6 pt-0">
+                  <Button variant="ghost" asChild className="px-0 text-primary font-bold hover:bg-transparent hover:text-primary/70">
+                    <Link to={service.href}>
+                      {service.linkText}{" "}
+                      <span className="inline-block transition-transform duration-300 group-hover/button:translate-x-1.5">→</span>
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </SpotlightCard>
           </motion.div>
         ))}
-      </div>
-
-      {/* Courses Sub-section */}
-      <div className="bg-gray-light p-10 md:p-16 rounded-[32px]">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
-          <div>
-            <h3 className="text-3xl font-bold mb-4">Professional Courses</h3>
-            <p className="text-deep-navy/60 max-w-md">
-              Specialized certification programs to empower your workforce with modern skills.
-            </p>
-          </div>
-          <Link to="/services" className="bg-deep-navy text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-blue transition-colors">
-            View All Courses
-          </Link>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-6">
-          {courses.map((course, i) => (
-            <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-gold-accent/10 text-gold-accent rounded-xl flex items-center justify-center">
-                {course.icon}
-              </div>
-              <span className="font-bold text-lg">{course.title}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      </motion.div>
     </Section>
   );
 }

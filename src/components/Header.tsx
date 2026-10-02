@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { motion } from "motion/react";
+import { Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { staggerContainer, fadeInUp } from "../lib/motion";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,94 +29,112 @@ export default function Header() {
 
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "Learning", href: "/learning" },
+    { name: "HR Solutions", href: "/hr-solutions" },
+    { name: "People Advisory", href: "/people-advisory" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Careers", href: "/careers" },
     { name: "Contact", href: "/contact" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 glass transition-all duration-300 ${
+        isScrolled ? "shadow-lg shadow-deep-navy/5 py-4" : "py-7"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden shadow-sm group-hover:shadow-md transition-shadow p-1">
-            <img 
-              src="src/logo.png"
-              alt="ZC Logo" 
-              className="w-full h-full object-contain"
-              onError={(e) => {
-                // Fallback if logo.png is not found
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.parentElement!.innerHTML = '<span class="text-deep-navy font-bold text-2xl">ZC</span>';
-              }}
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl md:text-2xl font-bold font-serif text-deep-navy tracking-tight leading-none">
-              ZEBULON
-            </span>
-            <span className="text-xs font-bold text-primary-blue tracking-[0.2em] uppercase">
-              CONSULTING
-            </span>
-          </div>
+        <Link to="/" className="flex items-center group">
+          <img
+            src="/images/logo-horizontal.png"
+            alt="Zebulon Consulting"
+            className="h-16 md:h-20 w-auto object-contain transition-transform group-hover:scale-[1.03]"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className={`font-medium transition-colors ${
-                location.pathname === link.href 
-                  ? "text-primary-blue" 
-                  : "text-deep-navy hover:text-primary-blue"
-              }`}
+        {/* Desktop Nav (6 links + CTA needs the full lg breakpoint to avoid
+            colliding/wrapping in the 768–1024px tablet range — the mobile
+            menu below covers that range instead) */}
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+          <nav className="flex items-center space-x-6 xl:space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`relative group font-medium transition-colors whitespace-nowrap ${
+                  location.pathname === link.href
+                    ? "text-primary-blue"
+                    : "text-deep-navy hover:text-primary-blue"
+                }`}
+              >
+                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5">{link.name}</span>
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-primary-blue to-gold-accent scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
+              </Link>
+            ))}
+          </nav>
+          <Button asChild className="h-11 px-6 rounded-xl font-bold">
+            <Link to="/contact">Book a Call</Link>
+          </Button>
+        </div>
+
+        {/* Mobile Menu Toggle (covers everything below lg, including tablet widths) */}
+        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <button className="lg:hidden text-deep-navy" aria-label="Open menu">
+              <Menu size={28} />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="glass-dark border-white/10 w-[300px] sm:w-[380px] p-0">
+            <SheetHeader>
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <Link to="/" className="inline-flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
+                <div className="bg-bg-light rounded-xl px-3 py-2.5 shadow-sm">
+                  <img
+                    src="/images/logo-horizontal.png"
+                    alt="Zebulon Consulting"
+                    className="h-9 w-auto object-contain"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
+              </Link>
+            </SheetHeader>
+
+            <motion.nav
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col gap-2 px-6 py-4"
             >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden text-deep-navy"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Nav */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
-          >
-            <div className="flex flex-col p-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={`text-lg font-medium ${
-                    location.pathname === link.href ? "text-primary-blue" : "text-deep-navy"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
+              {navLinks.map((link, index) => (
+                <motion.div key={link.name} custom={index} variants={fadeInUp}>
+                  <SheetClose asChild>
+                    <Link
+                      to={link.href}
+                      className={`block text-2xl font-bold py-2 transition-colors ${
+                        location.pathname === link.href ? "text-gold-accent" : "text-white/80 hover:text-white"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </SheetClose>
+                </motion.div>
               ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.nav>
+
+            <SheetFooter>
+              <Button variant="accent" asChild className="w-full h-12 rounded-xl font-bold">
+                <SheetClose asChild>
+                  <Link to="/contact">Book a Call</Link>
+                </SheetClose>
+              </Button>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      </div>
     </header>
   );
 }

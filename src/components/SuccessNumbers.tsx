@@ -1,5 +1,9 @@
-import { motion, useScroll, useTransform, useSpring, useInView } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState } from "react";
+import { Building2, BookOpen, Users, GraduationCap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import SpotlightCard from "./SpotlightCard";
+import { staggerContainer, fadeInUp } from "../lib/motion";
 
 function Counter({ value, suffix = "" }: { value: string; suffix?: string }) {
   const ref = useRef(null);
@@ -31,30 +35,25 @@ function Counter({ value, suffix = "" }: { value: string; suffix?: string }) {
 
   return (
     <span ref={ref}>
-      {count}{suffix || (value.includes("+") ? "+" : "")}
+      {count.toLocaleString("en-IN")}{suffix || (value.includes("+") ? "+" : "")}
     </span>
   );
 }
 
 export default function SuccessNumbers() {
   const stats = [
-    { label: "Years of Expertise", value: "15+" },
-    { label: "Core Services", value: "4" },
-    { label: "Year Founded", value: "2020" },
-    { label: "Customized Solutions", value: "100%" },
+    { label: "Organisations", value: "60+", icon: Building2 },
+    { label: "Programs", value: "1200+", icon: BookOpen },
+    { label: "Experts", value: "50+", icon: Users },
+    { label: "Professionals Trained", value: "30,000+", icon: GraduationCap },
   ];
 
   return (
     <section className="relative py-24 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80" 
-          alt="Business Building" 
-          className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/95 to-primary-blue/90 mix-blend-multiply"></div>
+      {/* On-brand gradient mesh background (no generic stock photo) */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-deep-navy via-[#1d3b57] to-primary-blue">
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-blue/30 blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full bg-gold-accent/20 blur-3xl"></div>
       </div>
 
       {/* Geometric Pattern Overlay */}
@@ -69,18 +68,42 @@ export default function SuccessNumbers() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 relative z-20">
+      <div className="max-w-7xl mx-auto px-6 relative z-20">
+        <div className="text-center mb-16">
+          <Badge variant="outline" className="h-auto text-gold-accent border-gold-accent/30 bg-gold-accent/5 font-bold uppercase tracking-widest text-sm px-4 py-1.5">
+            Our Work in Numbers
+          </Badge>
+        </div>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+        >
         {stats.map((stat, index) => (
-          <div key={index} className="text-center group">
-            <h3 className="text-5xl md:text-7xl font-bold text-white mb-4 font-serif group-hover:text-gold-accent transition-colors duration-300">
-              <Counter value={stat.value} suffix={stat.value === "100%" ? "%" : ""} />
-            </h3>
-            <div className="w-12 h-1 bg-gold-accent mx-auto mb-4 group-hover:w-20 transition-all duration-300"></div>
-            <p className="text-white/70 text-sm md:text-base font-bold uppercase tracking-widest">
-              {stat.label}
-            </p>
-          </div>
+          <SpotlightCard key={index} color="gold" className="rounded-3xl">
+            <motion.div
+              custom={index}
+              variants={fadeInUp}
+              whileHover={{ y: -8 }}
+              className="glass-dark rounded-3xl p-5 sm:p-6 md:p-8 text-center group"
+            >
+              <div className="icon-pop w-14 h-14 rounded-full bg-gold-accent mx-auto mb-5 flex items-center justify-center text-deep-navy shadow-md">
+                <stat.icon size={24} />
+              </div>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 font-serif group-hover:text-gold-accent transition-colors duration-300 break-words">
+                <Counter value={stat.value} />
+              </h3>
+              <div className="w-12 h-1 bg-gold-accent mx-auto mb-4 group-hover:w-20 transition-all duration-300"></div>
+              <p className="text-white/70 text-sm md:text-base font-bold uppercase tracking-widest">
+                {stat.label}
+              </p>
+            </motion.div>
+          </SpotlightCard>
         ))}
+        </motion.div>
       </div>
     </section>
   );
