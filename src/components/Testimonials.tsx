@@ -28,7 +28,7 @@ export default function Testimonials() {
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
     },
     {
-      text: "Zebulon didn't just tell us what was wrong — they helped us build the way forward.",
+      text: "Zebulon didn't just tell us what was wrong; they helped us build the way forward.",
       author: "Anil K.",
       role: "Business Owner",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80"

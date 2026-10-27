@@ -83,12 +83,12 @@ export default function SuccessNumbers() {
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
         >
         {stats.map((stat, index) => (
-          <SpotlightCard key={index} color="gold" className="rounded-3xl">
+          <SpotlightCard key={index} color="gold" className="h-full rounded-3xl">
             <motion.div
               custom={index}
               variants={fadeInUp}
               whileHover={{ y: -8 }}
-              className="glass-dark rounded-3xl p-5 sm:p-6 md:p-8 text-center group"
+              className="glass-dark rounded-3xl p-5 sm:p-6 md:p-8 text-center group h-full flex flex-col items-center justify-center"
             >
               <div className="icon-pop w-14 h-14 rounded-full bg-gold-accent mx-auto mb-5 flex items-center justify-center text-deep-navy shadow-md">
                 <stat.icon size={24} />

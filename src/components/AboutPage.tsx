@@ -61,7 +61,7 @@ export default function AboutPage() {
               Founded in 2020, Zebulon Consulting was born out of a desire to bridge the gap between traditional management consulting and practical, hands-on business support. Our founders saw that many organizations struggled not with strategy, but with execution and people development.
             </p>
             <p className="text-lg text-deep-navy/70 mb-6 leading-relaxed">
-              With over 15 years of experience per consultant, we bring a wealth of cross-industry knowledge to every project. We've worked with startups, SMEs, and large corporations across India and beyond, helping them navigate the complexities of modern business.
+              With 18+ years of experience per consultant, we bring a wealth of cross-industry knowledge to every project. We've worked with startups, SMEs, and large corporations across India and beyond, helping them navigate the complexities of modern business.
             </p>
           </div>
         </div>

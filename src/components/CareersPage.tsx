@@ -82,7 +82,7 @@ export default function CareersPage() {
               {[
                 { title: "Growth Mindset", desc: "We invest in your professional development through continuous learning and mentorship.", icon: TrendingUp },
                 { title: "Impactful Work", desc: "Help organizations transform and see the real-world results of your efforts.", icon: Sparkles },
-                { title: "Collaborative Culture", desc: "Work alongside industry veterans with 15+ years of experience in a flat hierarchy.", icon: Handshake }
+                { title: "Collaborative Culture", desc: "Work alongside industry veterans with 18+ years of experience in a flat hierarchy.", icon: Handshake }
               ].map((item, i) => (
                 <div key={i} className="flex gap-6 group">
                   <div className="icon-pop w-16 h-16 bg-bg-light shadow-lg rounded-2xl flex items-center justify-center text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-all duration-300">

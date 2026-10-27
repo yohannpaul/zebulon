@@ -58,9 +58,9 @@ export default function HowWeWork() {
       </div>
 
       <div ref={containerRef} className="max-w-4xl mx-auto relative">
-        {/* Connecting line — static track */}
+        {/* Connecting line: static track */}
         <div className="hidden md:block absolute left-[52px] top-4 bottom-4 w-px bg-primary-blue/15"></div>
-        {/* Connecting line — scroll-driven fill */}
+        {/* Connecting line: scroll-driven fill */}
         <motion.div
           style={{ scaleY: scrollYProgress, transformOrigin: "top" }}
           className="hidden md:block absolute left-[52px] top-4 bottom-4 w-px bg-gradient-to-b from-primary-blue to-gold-accent"

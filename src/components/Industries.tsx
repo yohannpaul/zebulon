@@ -14,6 +14,7 @@ import {
   ShoppingCart,
   Store,
   GraduationCap,
+  Car,
 } from "lucide-react";
 
 export default function Industries() {
@@ -29,6 +30,7 @@ export default function Industries() {
     { name: "FMCG & Consumer Goods", icon: ShoppingCart },
     { name: "E-commerce & Marketplaces", icon: Store },
     { name: "Education", icon: GraduationCap },
+    { name: "Automotive", icon: Car },
   ];
 
   return (

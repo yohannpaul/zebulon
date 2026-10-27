@@ -116,10 +116,15 @@ export default function Footer() {
           </a>
           <p className="text-white/70">Hyderabad, Telangana, India</p>
           <p className="text-white/70">Professional Training and Coaching</p>
-          <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl w-fit">
+          <a
+            href="https://share.google/ZBkkAtFmQXCunt0ki"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors px-4 py-2 rounded-xl w-fit"
+          >
             <Star className="text-gold-accent" size={16} fill="currentColor" />
-            <span className="text-white/80 font-bold text-sm">4.9 · Google Reviews</span>
-          </div>
+            <span className="text-white/80 font-bold text-sm">4.9 Google Reviews</span>
+          </a>
         </div>
       </div>
 

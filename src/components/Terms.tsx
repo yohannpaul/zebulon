@@ -36,7 +36,7 @@ export default function Terms() {
             <section>
               <h2 className="text-2xl font-bold text-deep-navy mb-3">Intellectual Property</h2>
               <p>
-                All content on this website — including text, graphics, logos, and training materials — is
+                All content on this website, including text, graphics, logos, and training materials, is
                 the property of Zebulon Consulting unless otherwise noted, and may not be reproduced without
                 prior written consent.
               </p>

@@ -4,7 +4,7 @@ interface GradientBackdropProps {
 
 /**
  * Reusable decorative layer of blurred, low-opacity circles sitting behind
- * section content — gives glass surfaces something visually rich to blur over.
+ * section content; gives glass surfaces something visually rich to blur over.
  * Mirrors the blob treatment used in Hero.tsx.
  */
 export default function GradientBackdrop({ variant = "light" }: GradientBackdropProps) {

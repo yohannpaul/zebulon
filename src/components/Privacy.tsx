@@ -19,8 +19,8 @@ export default function Privacy() {
               <h2 className="text-2xl font-bold text-deep-navy mb-3">Information We Collect</h2>
               <p>
                 When you reach out to Zebulon Consulting through our contact form or by phone, we collect
-                the details you provide — such as your name, email address, phone number, and the message
-                content — so we can respond to your enquiry.
+                the details you provide, such as your name, email address, phone number, and the message
+                content, so we can respond to your enquiry.
               </p>
             </section>
 

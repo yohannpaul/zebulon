@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { staggerContainer, fadeInUp, EASE_PREMIUM } from "../lib/motion";
 
-// The three value-prop phrases roll through like a die turning on one axis —
+// The three value-prop phrases roll through like a die turning on one axis;
 // each one flips up and away while the next flips in from the same direction.
 const ROTATING_PHRASES = [
   "Find the Right People",
@@ -16,28 +16,11 @@ const ROTATING_PHRASES = [
 ];
 
 // The three core service nodes that branch out from the logo mark in the
-// hero graphic. Each one carries the actual offerings listed on its own page
-// (Learning / HR Solutions / People Advisory) as small tags, so the graphic
-// is a genuine map of what Zebulon does, not just decoration.
+// hero graphic, mapping to Learning / HR Solutions / People Advisory.
 const HERO_SERVICES = [
-  {
-    icon: GraduationCap,
-    label: "Learning",
-    items: ["Corporate Training", "Leadership Development", "Workshops", "Coaching"],
-    top: "16%",
-  },
-  {
-    icon: Users,
-    label: "HR Solutions",
-    items: ["Recruitment", "HR Policies & Process", "Performance Management", "Employee Engagement"],
-    top: "50%",
-  },
-  {
-    icon: Compass,
-    label: "People Advisory",
-    items: ["L&D Strategy", "Capability Building", "Organisation Development", "Performance Consulting"],
-    top: "84%",
-  },
+  { icon: GraduationCap, label: "Learning", top: "15%" },
+  { icon: Users, label: "HR Solutions", top: "50%" },
+  { icon: Compass, label: "People Advisory", top: "85%" },
 ];
 
 const HERO_BRANCH_PATHS = [
@@ -48,7 +31,7 @@ const HERO_BRANCH_PATHS = [
 
 export default function Hero() {
   // Cycles the hero headline's value-prop line on a timer, like a die
-  // rolling forward on one axis — see the rotateX flip on the span below.
+  // rolling forward on one axis; see the rotateX flip on the span below.
   const [rotatingIndex, setRotatingIndex] = useState(0);
   useEffect(() => {
     const id = setInterval(() => {
@@ -57,7 +40,7 @@ export default function Hero() {
     return () => clearInterval(id);
   }, []);
 
-  // Cursor-parallax for the decorative blur blobs — each blob springs toward
+  // Cursor-parallax for the decorative blur blobs; each blob springs toward
   // the mouse offset at a slightly different multiplier so they don't move in lockstep.
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -225,7 +208,28 @@ export default function Hero() {
               <p className="text-[11px] font-bold tracking-[0.18em] text-deep-navy/50 uppercase">Our Expertise</p>
             </motion.div>
 
-            {/* Faint radar rings emanating from the logo mark */}
+            {/* Slow ambient rotating sweep behind the logo, like a radar scanning
+                outward; purely decorative but keeps the panel feeling alive even
+                once the entrance animations are done */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              style={{ left: "22%", top: "50%" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[260px] md:h-[260px] rounded-full pointer-events-none"
+            >
+              <div
+                className="w-full h-full rounded-full"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, rgba(0,114,189,0.16), transparent 20%, transparent 80%, rgba(220,161,29,0.14))",
+                  maskImage: "radial-gradient(circle, transparent 55%, black 56%, black 100%)",
+                  WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 56%, black 100%)",
+                }}
+              />
+            </motion.div>
+
+            {/* Radar rings emanating from the logo mark: a static faint ring plus a
+                looping expand-and-fade ping, so the panel keeps pulsing outward */}
             <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
               <motion.circle
                 cx="22" cy="50" r="12" fill="none" stroke="rgba(0,114,189,0.12)" strokeWidth="0.4"
@@ -234,16 +238,20 @@ export default function Hero() {
                 transition={{ duration: 1, delay: 0.4, ease: EASE_PREMIUM }}
                 style={{ transformOrigin: "22px 50px" }}
               />
-              <motion.circle
-                cx="22" cy="50" r="19" fill="none" stroke="rgba(0,114,189,0.07)" strokeWidth="0.4"
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.55, ease: EASE_PREMIUM }}
-                style={{ transformOrigin: "22px 50px" }}
-              />
+              {[0, 1.3, 2.6].map((delay) => (
+                <motion.circle
+                  key={delay}
+                  cx="22" cy="50" r="10" fill="none" stroke="rgba(0,114,189,0.3)" strokeWidth="0.5"
+                  initial={{ opacity: 0, scale: 0.3 }}
+                  animate={{ opacity: [0, 0.6, 0], scale: [0.3, 2.1, 2.1] }}
+                  transition={{ duration: 3.9, repeat: Infinity, ease: "easeOut", delay: 1 + delay }}
+                  style={{ transformOrigin: "22px 50px" }}
+                />
+              ))}
 
-              {/* Branching connector lines from the logo mark to each service node,
-                  each with a small travelling dot once drawn in to suggest expertise flowing out */}
+              {/* Branching connector lines from the logo mark to each service node.
+                  Two staggered travelling dots per path keep a steady flow of
+                  "expertise" moving outward instead of one lone pulse. */}
               {HERO_BRANCH_PATHS.map((d, i) => (
                 <g key={d}>
                   <motion.path
@@ -256,8 +264,11 @@ export default function Hero() {
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 0.7 + i * 0.2, ease: EASE_PREMIUM }}
                   />
-                  <circle r="0.8" fill="#DCA11D">
-                    <animateMotion dur="3.2s" begin={`${1.9 + i * 0.3}s`} repeatCount="indefinite" path={d} />
+                  <circle r="0.9" fill="#DCA11D">
+                    <animateMotion dur="2.6s" begin={`${1.9 + i * 0.3}s`} repeatCount="indefinite" path={d} />
+                  </circle>
+                  <circle r="0.6" fill="var(--color-primary-blue)" opacity="0.7">
+                    <animateMotion dur="2.6s" begin={`${1.9 + i * 0.3 + 1.3}s`} repeatCount="indefinite" path={d} />
                   </circle>
                 </g>
               ))}
@@ -276,8 +287,18 @@ export default function Hero() {
               >
                 <div className="absolute -inset-5 rounded-full bg-primary-blue/10 blur-xl"></div>
                 <motion.div
-                  animate={{ boxShadow: ["0 0 0 0 rgba(0,114,189,0.22)", "0 0 0 18px rgba(0,114,189,0)"] }}
+                  animate={{ boxShadow: ["0 0 0 0 rgba(0,114,189,0.25)", "0 0 0 20px rgba(0,114,189,0)"] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+                  className="absolute inset-0 rounded-full"
+                />
+                <motion.div
+                  animate={{ boxShadow: ["0 0 0 0 rgba(220,161,29,0.25)", "0 0 0 12px rgba(220,161,29,0)"] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 1.25 }}
+                  className="absolute inset-0 rounded-full"
+                />
+                <motion.div
+                  animate={{ rotate: [0, 6, 0, -6, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white ring-1 ring-deep-navy/10 shadow-xl flex items-center justify-center p-4"
                 >
                   <img src="/images/zc-mark.png" alt="Zebulon Consulting logo mark" className="w-full h-full object-contain" />
@@ -285,13 +306,14 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Service info cards branching off the logo mark, each listing the
-                real offerings from that service's own page */}
+            {/* Service nodes branching off the logo mark: a compact, lively pill
+                per service with a pulsing icon chip, instead of a static list of
+                sub-offerings (those already live on each service's own page) */}
             {HERO_SERVICES.map((service, i) => (
               <div
                 key={service.label}
-                style={{ left: "76%", top: service.top }}
-                className="absolute -translate-x-1/2 -translate-y-1/2 z-10 w-[44%] max-w-[206px] min-w-[150px]"
+                style={{ left: "77%", top: service.top }}
+                className="absolute -translate-x-1/2 -translate-y-1/2 z-10 max-w-[208px]"
               >
                 <motion.div
                   initial={{ opacity: 0, x: 24, scale: 0.85 }}
@@ -299,27 +321,19 @@ export default function Hero() {
                   transition={{ duration: 0.6, delay: 1.2 + i * 0.25, ease: EASE_PREMIUM }}
                 >
                   <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ duration: 3.2 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
-                    whileHover={{ scale: 1.04 }}
-                    className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-deep-navy/5 p-3"
+                    animate={{ y: [0, i % 2 === 0 ? -9 : 9, 0] }}
+                    transition={{ duration: 2.8 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.35 }}
+                    whileHover={{ scale: 1.08, rotate: i % 2 === 0 ? -2 : 2 }}
+                    className="flex items-center gap-2.5 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-deep-navy/5 pl-2.5 pr-5 py-2.5 cursor-default"
                   >
-                    <div className="flex items-center gap-2.5 mb-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-primary-blue flex items-center justify-center shrink-0 shadow-sm">
-                        <service.icon size={16} className="text-white" />
-                      </div>
-                      <p className="text-sm font-bold text-deep-navy leading-tight">{service.label}</p>
-                    </div>
-                    <div className="hidden sm:grid grid-cols-2 gap-1">
-                      {service.items.map((item) => (
-                        <span
-                          key={item}
-                          className="text-[9.5px] leading-tight font-semibold text-primary-blue bg-primary-blue/8 rounded-md px-1.5 py-1 text-center"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+                    <motion.div
+                      animate={{ boxShadow: ["0 0 0 0 rgba(0,114,189,0.3)", "0 0 0 9px rgba(0,114,189,0)"] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: i * 0.4 }}
+                      className="w-10 h-10 rounded-xl bg-primary-blue flex items-center justify-center shrink-0 shadow-sm"
+                    >
+                      <service.icon size={18} className="text-white" />
+                    </motion.div>
+                    <p className="text-sm font-bold text-deep-navy leading-tight whitespace-nowrap">{service.label}</p>
                   </motion.div>
                 </motion.div>
               </div>
@@ -337,7 +351,7 @@ export default function Hero() {
                 <Users size={24} />
               </div>
               <div>
-                <p className="text-3xl font-bold text-deep-navy">15+</p>
+                <p className="text-3xl font-bold text-deep-navy">18+</p>
                 <p className="text-xs font-bold text-deep-navy/40 uppercase tracking-widest">Years Expertise</p>
               </div>
             </div>

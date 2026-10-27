@@ -39,7 +39,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 glass transition-all duration-300 ${
-        isScrolled ? "shadow-lg shadow-deep-navy/5 py-4" : "py-7"
+        isScrolled ? "shadow-lg shadow-deep-navy/5 py-[14px]" : "py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -47,7 +47,7 @@ export default function Header() {
           <img
             src="/images/logo-horizontal.png"
             alt="Zebulon Consulting"
-            className="h-16 md:h-20 w-auto object-contain transition-transform group-hover:scale-[1.03]"
+            className="h-[54px] md:h-[68px] w-auto object-contain transition-transform group-hover:scale-[1.03]"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
             }}
@@ -55,7 +55,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav (6 links + CTA needs the full lg breakpoint to avoid
-            colliding/wrapping in the 768–1024px tablet range — the mobile
+            colliding/wrapping in the 768 to 1024px tablet range; the mobile
             menu below covers that range instead) */}
         <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           <nav className="flex items-center space-x-6 xl:space-x-8">

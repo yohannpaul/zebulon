@@ -11,7 +11,7 @@ import { useDocumentMeta } from "../lib/useDocumentMeta";
 export default function HRSolutionsPage() {
   useDocumentMeta(
     "HR Solutions | Zebulon Consulting",
-    "End-to-end HR support — recruitment, policy design, performance management, and employee engagement — for growing organizations."
+    "End-to-end HR support: recruitment, policy design, performance management, and employee engagement, for growing organizations."
   );
 
   const offerings = [

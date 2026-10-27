@@ -5,7 +5,6 @@ import Services from "./Services";
 import HowWeWork from "./HowWeWork";
 import WhyUs from "./WhyUs";
 import Industries from "./Industries";
-import ClientLogos from "./ClientLogos";
 import Testimonials from "./Testimonials";
 import FinalCTA from "./FinalCTA";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
@@ -25,7 +24,6 @@ export default function Home() {
       <HowWeWork />
       <WhyUs />
       <Industries />
-      <ClientLogos />
       <Testimonials />
       <FinalCTA />
     </>

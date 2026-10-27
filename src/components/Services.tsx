@@ -80,9 +80,12 @@ export default function Services() {
                   <p className="text-deep-navy/70 leading-relaxed mb-6">
                     {service.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
+                  <div className="flex flex-wrap gap-2.5 mt-auto">
                     {service.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="font-normal">
+                      <Badge
+                        key={tag}
+                        className="h-auto bg-deep-navy text-white border-transparent rounded-full px-4 py-2 text-sm font-semibold [a]:hover:bg-deep-navy/90"
+                      >
                         {tag}
                       </Badge>
                     ))}

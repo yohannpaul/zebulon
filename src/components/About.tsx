@@ -19,10 +19,9 @@ export default function About() {
         >
           <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl relative group shine-sweep">
             <img
-              src="/images/yohannimg.jpg"
-              alt="Consulting Team"
+              src="/images/about-graphic.png"
+              alt="Illustration of the Zebulon Consulting team collaborating on people, growth and performance"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-deep-navy/40 to-transparent"></div>
             <div className="absolute bottom-6 left-6 glass p-5 rounded-xl flex items-center gap-4">
@@ -30,7 +29,7 @@ export default function About() {
                 <Award size={20} />
               </div>
               <div>
-                <p className="text-deep-navy font-bold text-2xl">15+ Years</p>
+                <p className="text-deep-navy font-bold text-2xl">18+ Years</p>
                 <p className="text-deep-navy/60 text-sm font-medium uppercase tracking-wider">Industry Experience</p>
               </div>
             </div>
@@ -54,7 +53,7 @@ export default function About() {
             Zebulon Consulting works with organisations to develop their people, strengthen their teams and build better people practices.
           </p>
           <p className="text-lg text-deep-navy/80 mb-6 leading-relaxed">
-            Our work spans Learning & Development, HR and People Advisory — from leadership development and corporate learning to recruitment, HR solutions and organisational consulting.
+            Our work spans Learning & Development, HR and People Advisory: leadership development, corporate learning, recruitment, HR solutions and organisational consulting.
           </p>
           <p className="text-lg text-deep-navy/80 mb-10 leading-relaxed">
             We don't believe in one-size-fits-all solutions. We understand what the organisation needs, identify the gaps and build solutions that are practical, relevant and made to work in the real world.
