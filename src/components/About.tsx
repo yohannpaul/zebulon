@@ -23,7 +23,7 @@ export default function About() {
               alt="Illustration of the Zebulon Consulting team collaborating on people, growth and performance"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-deep-navy/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-deep-navy/15 to-transparent"></div>
             <div className="absolute bottom-6 left-6 glass p-5 rounded-xl flex items-center gap-4">
               <div className="w-11 h-11 rounded-full bg-gold-accent/15 flex items-center justify-center text-gold-accent flex-shrink-0">
                 <Award size={20} />

@@ -159,7 +159,7 @@ export default function LearningPage() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="relative"
           >
-            <div className="relative rounded-[32px] overflow-hidden shadow-2xl shine-sweep aspect-[4/5] md:aspect-square">
+            <div className="relative rounded-[32px] overflow-hidden shadow-2xl shine-sweep aspect-video">
               <img
                 src="/images/learning-hero-illustration.jpg"
                 alt="Illustration of corporate learning and leadership development"
