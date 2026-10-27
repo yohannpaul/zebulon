@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import Section from "./Section";
-import SpotlightCard from "./SpotlightCard";
-import { motion } from "motion/react";
+import GradientBackdrop from "./GradientBackdrop";
+import GlowCTAButton from "./GlowCTAButton";
+import { motion, useScroll } from "motion/react";
 import {
   GraduationCap,
   Users,
@@ -19,12 +21,13 @@ import {
   PencilRuler,
   Rocket,
   TrendingUp,
+  Building2,
+  Laptop,
+  Layers,
+  UserCheck,
   ArrowRight,
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 
 export default function LearningPage() {
@@ -107,49 +110,84 @@ export default function LearningPage() {
     { icon: TrendingUp, label: "Reinforce", description: "Support application beyond the session." },
   ];
 
-  const formats = ["In-person", "Virtual", "Blended", "Workshops", "Learning Journeys", "1:1", "Small Group Coaching"];
+  const formats = [
+    { label: "In-person", icon: Building2 },
+    { label: "Virtual", icon: Laptop },
+    { label: "Blended", icon: Layers },
+    { label: "Workshops", icon: Presentation },
+    { label: "Learning Journeys", icon: Route },
+    { label: "1:1", icon: UserCheck },
+    { label: "Small Group Coaching", icon: Users },
+  ];
 
   const audienceChain = ["Individual Contributors", "New Managers", "Experienced Managers", "Senior Leaders"];
   const audienceAlso = "Sales Teams, Customer facing teams, Leadership Teams";
 
+  const buildRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: buildProgress } = useScroll({
+    target: buildRef,
+    offset: ["start center", "end center"],
+  });
+
   return (
     <div className="pt-20">
-      <Section className="relative bg-bg-light text-deep-navy pt-40 pb-32 md:pt-52 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/learning-hero-illustration.jpg"
-            alt="Illustration of corporate learning and leadership development"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 pointer-events-none -z-0">
-          <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full blur-3xl bg-white/20"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl bg-deep-navy/10"></div>
-        </div>
-        <div className="relative text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass p-8 md:p-12 rounded-3xl inline-block"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-deep-navy max-w-3xl mx-auto">
+      <Section className="relative overflow-hidden bg-bg-light pt-40 pb-20 md:pt-52 md:pb-28" backdrop={<GradientBackdrop variant="light" />}>
+        <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+            <Badge className="h-auto gap-2 pl-3 pr-4 py-2 text-sm font-bold border-primary/20 bg-primary/10 text-primary rounded-full mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-blue opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-blue"></span>
+              </span>
+              Learning & Development
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold text-deep-navy leading-[1.1] mb-6">
               Learning that works beyond the classroom.
             </h1>
-            <p className="text-xl text-deep-navy max-w-xl mx-auto">
+            <p className="text-xl text-deep-navy/70 mb-8 leading-relaxed max-w-lg">
               Practical learning experiences designed around your people, their roles and the
               challenges they face at work.
             </p>
-            <Button variant="accent" size="lg" asChild className="h-14 px-10 rounded-2xl text-lg shadow-xl mt-8">
-              <Link to="/contact">
-                Talk to Us <ArrowRight size={20} />
-              </Link>
-            </Button>
+            <GlowCTAButton to="/contact">
+              Talk to Us <ArrowRight size={20} />
+            </GlowCTAButton>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="relative"
+          >
+            <div className="relative rounded-[32px] overflow-hidden shadow-2xl shine-sweep aspect-[4/5] md:aspect-square">
+              <img
+                src="/images/learning-hero-illustration.jpg"
+                alt="Illustration of corporate learning and leadership development"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/30 to-transparent"></div>
+            </div>
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-6 -left-6 glass p-5 rounded-2xl shadow-xl hidden sm:flex items-center gap-3"
+            >
+              <div className="w-11 h-11 rounded-full bg-gold-accent flex items-center justify-center text-deep-navy shrink-0">
+                <GraduationCap size={20} />
+              </div>
+              <div>
+                <p className="text-xl font-bold text-deep-navy leading-none">6 Tracks</p>
+                <p className="text-[11px] uppercase tracking-wider text-deep-navy/50 font-bold">Learning Solutions</p>
+              </div>
+            </motion.div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl -z-10"></div>
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gold-accent/10 rounded-full blur-3xl -z-10"></div>
           </motion.div>
         </div>
       </Section>
 
-      <Section className="bg-bg-light">
-        <div className="max-w-3xl mx-auto text-center">
+      <Section className="relative overflow-hidden">
+        <div className="max-w-3xl mx-auto text-center relative">
           <p className="text-2xl md:text-4xl font-bold text-deep-navy leading-snug">
             We don't start with a training topic.
             <br />
@@ -160,50 +198,75 @@ export default function LearningPage() {
       </Section>
 
       <Section>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="text-center mb-14">
+          <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
+            What We Offer
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold">Solutions</h2>
+        </div>
+
+        <div className="max-w-4xl mx-auto divide-y divide-deep-navy/10">
           {solutions.map((item, index) => (
-            <motion.div key={index} whileHover={{ y: -8 }}>
-              <SpotlightCard color="gold" className="rounded-xl h-full">
-                <Card className="glass text-center group h-full">
-                  <CardContent className="p-8">
-                    <div className="icon-pop w-16 h-16 bg-primary-blue/5 rounded-2xl flex items-center justify-center mb-6 mx-auto text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                      <item.icon size={32} />
-                    </div>
-                    <h3 className="text-lg font-bold text-deep-navy mb-2">{item.title}</h3>
-                    <p className="text-sm text-deep-navy/60 leading-relaxed">{item.description}</p>
-                  </CardContent>
-                </Card>
-              </SpotlightCard>
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className="group flex items-center gap-5 sm:gap-6 py-6 px-4 -mx-4 rounded-xl hover:bg-bg-light transition-colors"
+            >
+              <span className="hidden sm:block font-serif font-bold text-4xl md:text-5xl text-primary-blue/10 group-hover:text-gold-accent/40 transition-colors w-16 shrink-0 text-center">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className="w-14 h-14 rounded-2xl bg-primary-blue/5 flex items-center justify-center text-primary-blue shrink-0 group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
+                <item.icon size={24} />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-deep-navy mb-1">{item.title}</h3>
+                <p className="text-sm text-deep-navy/60 leading-relaxed">{item.description}</p>
+              </div>
+              <ArrowRight className="hidden sm:block text-deep-navy/15 group-hover:text-gold-accent group-hover:translate-x-1 transition-all shrink-0" size={20} />
             </motion.div>
           ))}
         </div>
       </Section>
 
-      <Section className="bg-bg-light">
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="h-auto text-primary border-primary/30 bg-primary/5 font-bold uppercase tracking-widest text-sm px-4 py-1.5 mb-4">
+      <Section className="bg-bg-light relative overflow-hidden" backdrop={<GradientBackdrop variant="light" />}>
+        <div className="text-center mb-14">
+          <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
             What We Cover
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Areas of Expertise</h2>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold">Areas of Expertise</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="max-w-5xl mx-auto space-y-7 relative z-10">
           {expertiseAreas.map((area, index) => (
-            <motion.div key={index} whileHover={{ y: -6 }}>
-              <SpotlightCard color="blue" className="rounded-xl h-full">
-                <Card className="glass h-full">
-                  <CardContent className="p-7">
-                    <div className="icon-pop w-12 h-12 bg-primary-blue/5 rounded-xl flex items-center justify-center mb-4 text-primary-blue">
-                      <area.icon size={24} />
-                    </div>
-                    <h3 className="text-base font-bold text-deep-navy mb-2">{area.title}</h3>
-                    <p className="text-sm text-deep-navy/60 leading-relaxed">
-                      {area.topics.join(" · ")}
-                    </p>
-                  </CardContent>
-                </Card>
-              </SpotlightCard>
+            <motion.div
+              key={area.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-start"
+            >
+              <div className="flex items-center gap-3 sm:w-64 shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary-blue shadow-sm shrink-0">
+                  <area.icon size={20} />
+                </div>
+                <h3 className="font-bold text-deep-navy">{area.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {area.topics.map((topic) => (
+                  <span
+                    key={topic}
+                    className={`text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full ${
+                      index % 2 === 0 ? "bg-primary-blue/8 text-primary-blue" : "bg-gold-accent/15 text-deep-navy"
+                    }`}
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -218,48 +281,59 @@ export default function LearningPage() {
           <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-          {buildSteps.map((step, index) => (
-            <motion.div
-              key={step.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <SpotlightCard color="gold" className="rounded-2xl h-full">
-                <div className="glass p-6 rounded-2xl text-center h-full flex flex-col items-center">
-                  <div className="icon-pop w-14 h-14 rounded-full bg-primary-blue/5 flex items-center justify-center mb-4 text-primary-blue">
-                    <step.icon size={24} />
-                  </div>
-                  <h3 className="text-base font-bold text-deep-navy mb-2">{step.label}</h3>
-                  <p className="text-sm text-deep-navy/60 leading-relaxed">{step.description}</p>
+        <div ref={buildRef} className="relative max-w-5xl mx-auto">
+          <div className="hidden md:block absolute left-0 right-0 top-7 h-px bg-primary-blue/15"></div>
+          <motion.div
+            style={{ scaleX: buildProgress, transformOrigin: "left" }}
+            className="hidden md:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-primary-blue to-gold-accent"
+          ></motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-4 relative">
+            {buildSteps.map((step, index) => (
+              <motion.div
+                key={step.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="icon-pop w-14 h-14 rounded-full bg-white border-2 border-primary-blue/20 flex items-center justify-center text-primary-blue mb-4 relative z-10 shadow-sm group-hover:border-gold-accent group-hover:text-gold-accent transition-colors">
+                  <step.icon size={22} />
                 </div>
-              </SpotlightCard>
-            </motion.div>
-          ))}
+                <h3 className="text-base font-bold text-deep-navy mb-1.5">{step.label}</h3>
+                <p className="text-sm text-deep-navy/60 leading-relaxed">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </Section>
 
       <Section className="bg-bg-light">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Learning Formats</h2>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
+        <div className="text-center mb-10">
+          <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
+            Ways We Deliver
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold">Learning Formats</h2>
         </div>
         <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-20">
           {formats.map((format) => (
-            <Badge
-              key={format}
-              className="h-auto bg-deep-navy text-white border-transparent rounded-full px-5 py-2.5 text-sm font-semibold"
+            <motion.div
+              key={format.label}
+              whileHover={{ y: -3 }}
+              className="flex items-center gap-2 bg-white border border-deep-navy/10 shadow-sm rounded-full px-5 py-2.5"
             >
-              {format}
-            </Badge>
+              <format.icon size={16} className="text-primary-blue" />
+              <span className="text-sm font-semibold text-deep-navy">{format.label}</span>
+            </motion.div>
           ))}
         </div>
 
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Who We Work With</h2>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
+          <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
+            The People We Support
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold">Who We Work With</h2>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
           {audienceChain.map((stage) => (
@@ -276,8 +350,8 @@ export default function LearningPage() {
         </div>
       </Section>
 
-      <Section className="relative bg-deep-navy text-white overflow-hidden">
-        <div className="relative z-10 text-center max-w-2xl mx-auto">
+      <Section dark className="relative overflow-hidden text-center" backdrop={<GradientBackdrop variant="dark" />}>
+        <div className="max-w-2xl mx-auto relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             What are you trying to develop?
           </h2>
@@ -285,11 +359,9 @@ export default function LearningPage() {
             Tell us what's happening with your people or teams. We'll help you work out what kind
             of learning intervention makes sense.
           </p>
-          <Button variant="accent" size="lg" asChild className="h-14 px-10 rounded-2xl text-lg shadow-xl">
-            <Link to="/contact">
-              Get in Touch <ArrowRight size={20} />
-            </Link>
-          </Button>
+          <GlowCTAButton to="/contact">
+            Get in Touch <ArrowRight size={20} />
+          </GlowCTAButton>
         </div>
       </Section>
     </div>
