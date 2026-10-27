@@ -29,7 +29,7 @@ export default function WhyUs() {
                 <div className="icon-pop w-10 h-10 bg-primary-blue rounded-full flex items-center justify-center flex-shrink-0 text-white">
                   <reason.icon size={18} />
                 </div>
-                <span className="text-base sm:text-lg text-deep-navy/80 font-medium whitespace-nowrap">{reason.text}</span>
+                <span className="text-sm sm:text-lg text-deep-navy/80 font-medium sm:whitespace-nowrap">{reason.text}</span>
               </li>
             ))}
           </ul>
@@ -37,7 +37,7 @@ export default function WhyUs() {
 
         <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-deep-navy p-8 rounded-2xl text-center shadow-xl group hover:-translate-y-1 transition-transform duration-300">
+            <div key={index} className="bg-deep-navy p-5 sm:p-8 rounded-2xl text-center shadow-xl group hover:-translate-y-1 transition-transform duration-300">
               <div className="icon-pop w-11 h-11 rounded-xl bg-gold-accent mx-auto mb-4 flex items-center justify-center text-deep-navy shadow-md">
                 <stat.icon size={20} />
               </div>

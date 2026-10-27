@@ -312,8 +312,8 @@ export default function Hero() {
             {HERO_SERVICES.map((service, i) => (
               <div
                 key={service.label}
-                style={{ left: "77%", top: service.top }}
-                className="absolute -translate-x-1/2 -translate-y-1/2 z-10 max-w-[208px]"
+                style={{ top: service.top }}
+                className="absolute -translate-x-1/2 -translate-y-1/2 z-10 max-w-[172px] sm:max-w-[208px] left-[70%] sm:left-[77%]"
               >
                 <motion.div
                   initial={{ opacity: 0, x: 24, scale: 0.85 }}

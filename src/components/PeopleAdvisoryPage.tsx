@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 
@@ -159,14 +158,6 @@ export default function PeopleAdvisoryPage() {
       </Section>
 
       <Section>
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="h-auto text-primary border-primary/30 bg-primary/5 font-bold uppercase tracking-widest text-sm px-4 py-1.5 mb-4">
-            What's Included
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Services</h2>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
-        </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((item) => (
             <motion.div key={item.number} whileHover={{ y: -8 }}>
