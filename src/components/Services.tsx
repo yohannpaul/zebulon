@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { staggerContainer, fadeInUp } from "../lib/motion";
 
 export default function Services() {
@@ -62,44 +61,44 @@ export default function Services() {
         {services.map((service, index) => (
           <motion.div key={index} custom={index} variants={fadeInUp} whileHover={{ y: -8 }}>
             <SpotlightCard color="gold" className="h-full rounded-xl">
-              <Card className="glass group transition-shadow duration-300 hover:shadow-2xl h-full flex flex-col">
-                <img
-                  src={service.image}
-                  alt={`${service.title} illustration`}
-                  className="w-full h-44 object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <CardHeader>
-                  <div className="icon-pop w-16 h-16 bg-primary-blue rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold-accent transition-colors duration-300">
-                    {service.icon}
-                  </div>
-                  <CardTitle className="font-serif text-2xl font-bold text-deep-navy">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col">
-                  <p className="text-deep-navy/70 leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2.5 mt-auto">
-                    {service.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        className="h-auto bg-deep-navy text-white border-transparent rounded-full px-4 py-2 text-sm font-semibold [a]:hover:bg-deep-navy/90"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="bg-transparent border-none px-6 pb-6 pt-0">
-                  <Button variant="ghost" asChild className="px-0 text-primary font-bold hover:bg-transparent hover:text-primary/70">
-                    <Link to={service.href}>
+              <Link to={service.href} className="group block h-full" aria-label={service.linkText}>
+                <Card className="glass transition-shadow duration-300 hover:shadow-2xl h-full flex flex-col cursor-pointer">
+                  <img
+                    src={service.image}
+                    alt={`${service.title} illustration`}
+                    className="w-full h-44 object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <CardHeader>
+                    <div className="icon-pop w-16 h-16 bg-primary-blue rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold-accent transition-colors duration-300">
+                      {service.icon}
+                    </div>
+                    <CardTitle className="font-serif text-2xl font-bold text-deep-navy">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
+                    <p className="text-deep-navy/70 leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2.5 mt-auto">
+                      {service.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          className="h-auto bg-deep-navy text-white border-transparent rounded-full px-4 py-2 text-sm font-semibold"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                  <CardFooter className="bg-transparent border-none px-6 pb-6 pt-0">
+                    <span className="text-primary font-bold inline-flex items-center">
                       {service.linkText}{" "}
-                      <span className="inline-block transition-transform duration-300 group-hover/button:translate-x-1.5">→</span>
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                      <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+                    </span>
+                  </CardFooter>
+                </Card>
+              </Link>
             </SpotlightCard>
           </motion.div>
         ))}

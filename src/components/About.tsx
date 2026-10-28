@@ -59,7 +59,7 @@ export default function About() {
             We don't believe in one-size-fits-all solutions. We understand what the organisation needs, identify the gaps and build solutions that are practical, relevant and made to work in the real world.
           </p>
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
-            <Button variant="secondary" size="lg" asChild className="rounded-xl group">
+            <Button variant="secondary" size="lg" asChild className="h-14 px-10 rounded-2xl text-lg font-bold group">
               <Link to="/about">
                 Know More About Us <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>

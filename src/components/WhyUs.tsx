@@ -1,6 +1,6 @@
 import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
-import { Award, Globe, Handshake, SlidersHorizontal, MapPin, Clock, Layers, Calendar, Target } from "lucide-react";
+import { Award, Globe, Handshake, SlidersHorizontal, Clock, Layers, Calendar, Target } from "lucide-react";
 
 export default function WhyUs() {
   const reasons = [
@@ -8,7 +8,6 @@ export default function WhyUs() {
     { text: "Cross-industry perspective", icon: Globe },
     { text: "Integrated multi-service support", icon: Handshake },
     { text: "Fully customized, no generic recommendations", icon: SlidersHorizontal },
-    { text: "Hyderabad-based, growing presence", icon: MapPin },
   ];
 
   const stats = [

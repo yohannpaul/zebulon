@@ -23,6 +23,7 @@ import {
   Landmark,
   Briefcase,
   ChevronRight,
+  Quote,
   ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -163,19 +164,24 @@ export default function HRSolutionsPage() {
       </Section>
 
       <Section className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto text-center relative">
-          <h2 className="text-2xl md:text-3xl font-bold text-deep-navy mb-6">
-            Good HR practices make a difference.
-          </h2>
-          <p className="text-deep-navy/70 leading-relaxed mb-4">
-            As organisations grow, managing people becomes more complex. Hiring, policies,
-            performance management and employee engagement all need attention.
-          </p>
-          <p className="text-deep-navy/70 leading-relaxed">
-            We work with organisations to strengthen these areas, whether they need support with
-            a specific HR requirement or help setting up and improving their HR function.
-          </p>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto mt-8"></div>
+        <div className="max-w-3xl mx-auto relative">
+          <Quote className="absolute -top-8 -left-2 md:-left-12 text-primary-blue/10" size={96} />
+          <div className="relative pl-6 md:pl-10 border-l-4 border-gold-accent">
+            <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
+              Why This Matters
+            </span>
+            <p className="text-2xl md:text-3xl font-bold text-deep-navy leading-snug font-serif mb-6">
+              Good HR practices make a difference.
+            </p>
+            <p className="text-deep-navy/70 leading-relaxed mb-4 max-w-xl">
+              As organisations grow, managing people becomes more complex. Hiring, policies,
+              performance management and employee engagement all need attention.
+            </p>
+            <p className="text-deep-navy/70 leading-relaxed max-w-xl">
+              We work with organisations to strengthen these areas, whether they need support with
+              a specific HR requirement or help setting up and improving their HR function.
+            </p>
+          </div>
         </div>
       </Section>
 
@@ -294,17 +300,22 @@ export default function HRSolutionsPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {engagementModels.map((item, index) => (
-            <motion.div key={item.title} whileHover={{ y: -6, rotate: index % 2 === 0 ? -1 : 1 }}>
-              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-xl h-full">
-                <Card className="glass text-center group h-full">
-                  <CardContent className="p-7">
-                    <div className="icon-pop w-14 h-14 bg-primary-blue/5 rounded-2xl flex items-center justify-center mb-5 mx-auto text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                      <item.icon size={26} />
-                    </div>
-                    <h3 className="text-base font-bold text-deep-navy mb-2">{item.title}</h3>
-                    <p className="text-sm text-deep-navy/60 leading-relaxed">{item.description}</p>
-                  </CardContent>
-                </Card>
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.07 }}
+            >
+              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-2xl h-full">
+                <div className="glass rounded-2xl p-7 h-full relative overflow-hidden group">
+                  <item.icon className="absolute -right-4 -bottom-4 text-primary-blue/[0.06] group-hover:text-primary-blue/10 transition-colors" size={96} />
+                  <div className="icon-pop w-14 h-14 rounded-2xl bg-primary-blue flex items-center justify-center text-white shadow-md mb-5 relative z-10 group-hover:bg-gold-accent transition-colors duration-300">
+                    <item.icon size={24} />
+                  </div>
+                  <h3 className="text-base font-bold text-deep-navy mb-2 relative z-10">{item.title}</h3>
+                  <p className="text-sm text-deep-navy/60 leading-relaxed relative z-10">{item.description}</p>
+                </div>
               </SpotlightCard>
             </motion.div>
           ))}
@@ -322,17 +333,22 @@ export default function HRSolutionsPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {audiences.map((item, index) => (
-            <motion.div key={item.title} whileHover={{ y: -6, rotate: index % 2 === 0 ? 1 : -1 }}>
-              <SpotlightCard color={index % 2 === 0 ? "gold" : "blue"} className="rounded-xl h-full">
-                <Card className="glass text-center group h-full">
-                  <CardContent className="p-7">
-                    <div className="icon-pop w-14 h-14 bg-primary-blue/5 rounded-2xl flex items-center justify-center mb-5 mx-auto text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
-                      <item.icon size={26} />
-                    </div>
-                    <h3 className="text-base font-bold text-deep-navy mb-2">{item.title}</h3>
-                    <p className="text-sm text-deep-navy/60 leading-relaxed">{item.description}</p>
-                  </CardContent>
-                </Card>
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.07 }}
+            >
+              <SpotlightCard color={index % 2 === 0 ? "gold" : "blue"} className="rounded-2xl h-full">
+                <div className="glass rounded-2xl p-7 h-full relative overflow-hidden group">
+                  <item.icon className="absolute -right-4 -bottom-4 text-primary-blue/[0.06] group-hover:text-primary-blue/10 transition-colors" size={96} />
+                  <div className="icon-pop w-14 h-14 rounded-2xl bg-primary-blue flex items-center justify-center text-white shadow-md mb-5 relative z-10 group-hover:bg-gold-accent transition-colors duration-300">
+                    <item.icon size={24} />
+                  </div>
+                  <h3 className="text-base font-bold text-deep-navy mb-2 relative z-10">{item.title}</h3>
+                  <p className="text-sm text-deep-navy/60 leading-relaxed relative z-10">{item.description}</p>
+                </div>
               </SpotlightCard>
             </motion.div>
           ))}

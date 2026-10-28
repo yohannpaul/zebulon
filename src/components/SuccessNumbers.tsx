@@ -49,7 +49,7 @@ export default function SuccessNumbers() {
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 md:py-20 overflow-hidden">
       {/* On-brand gradient mesh background (no generic stock photo) */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-deep-navy via-[#1d3b57] to-primary-blue">
         <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-blue/30 blur-3xl"></div>

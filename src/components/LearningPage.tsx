@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
+import SpotlightCard from "./SpotlightCard";
 import GlowCTAButton from "./GlowCTAButton";
 import { motion, useScroll } from "motion/react";
 import {
@@ -25,6 +26,7 @@ import {
   Laptop,
   Layers,
   UserCheck,
+  Quote,
   ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -121,7 +123,7 @@ export default function LearningPage() {
   ];
 
   const audienceChain = ["Individual Contributors", "New Managers", "Experienced Managers", "Senior Leaders"];
-  const audienceAlso = "Sales Teams, Customer facing teams, Leadership Teams";
+  const audienceAlso = ["Sales Teams", "Customer facing teams", "Leadership Teams"];
 
   const buildRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: buildProgress } = useScroll({
@@ -187,13 +189,21 @@ export default function LearningPage() {
       </Section>
 
       <Section className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto text-center relative">
-          <p className="text-2xl md:text-4xl font-bold text-deep-navy leading-snug">
-            We don't start with a training topic.
-            <br />
-            We start with what needs to change.
-          </p>
-          <div className="w-20 h-1.5 bg-gold-accent mx-auto mt-8"></div>
+        <div className="max-w-3xl mx-auto relative">
+          <Quote className="absolute -top-8 -left-2 md:-left-12 text-primary-blue/10" size={96} />
+          <div className="relative pl-6 md:pl-10 border-l-4 border-gold-accent">
+            <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
+              Our Learning Philosophy
+            </span>
+            <p className="text-2xl md:text-4xl font-bold text-deep-navy leading-snug font-serif">
+              We don't start with a training topic.
+              <br />
+              We start with what needs to change.
+            </p>
+            <p className="mt-6 text-deep-navy/60 text-base md:text-lg max-w-xl">
+              Every learning intervention we design starts with your context, not a course catalogue.
+            </p>
+          </div>
         </div>
       </Section>
 
@@ -232,41 +242,48 @@ export default function LearningPage() {
       </Section>
 
       <Section className="bg-bg-light relative overflow-hidden" backdrop={<GradientBackdrop variant="light" />}>
-        <div className="text-center mb-14">
+        <div className="text-center mb-14 relative z-10">
           <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
             What We Cover
           </span>
           <h2 className="text-3xl md:text-5xl font-bold">Areas of Expertise</h2>
         </div>
 
-        <div className="max-w-5xl mx-auto space-y-7 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {expertiseAreas.map((area, index) => (
             <motion.div
               key={area.title}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: index * 0.06 }}
-              className="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-start"
             >
-              <div className="flex items-center gap-3 sm:w-64 shrink-0">
-                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary-blue shadow-sm shrink-0">
-                  <area.icon size={20} />
+              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-2xl h-full">
+                <div className="glass rounded-2xl p-7 h-full relative overflow-hidden">
+                  <area.icon className="absolute -right-5 -bottom-5 text-primary-blue/[0.06]" size={110} />
+                  <div className="flex items-center gap-4 mb-5 relative z-10">
+                    <div className="icon-pop w-14 h-14 rounded-2xl bg-primary-blue flex items-center justify-center text-white shadow-md shrink-0">
+                      <area.icon size={24} />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-deep-navy text-base leading-tight">{area.title}</h3>
+                      <span className="text-xs font-bold text-primary-blue/60 uppercase tracking-wider">
+                        {area.topics.length} Focus Areas
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 relative z-10">
+                    {area.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="text-xs font-semibold px-3 py-1.5 rounded-full bg-primary-blue/8 text-primary-blue"
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="font-bold text-deep-navy">{area.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {area.topics.map((topic) => (
-                  <span
-                    key={topic}
-                    className={`text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full ${
-                      index % 2 === 0 ? "bg-primary-blue/8 text-primary-blue" : "bg-gold-accent/15 text-deep-navy"
-                    }`}
-                  >
-                    {topic}
-                  </span>
-                ))}
-              </div>
+              </SpotlightCard>
             </motion.div>
           ))}
         </div>
@@ -316,37 +333,62 @@ export default function LearningPage() {
           </span>
           <h2 className="text-3xl md:text-5xl font-bold">Learning Formats</h2>
         </div>
-        <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-20">
-          {formats.map((format) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mb-16">
+          {formats.map((format, index) => (
             <motion.div
               key={format.label}
-              whileHover={{ y: -3 }}
-              className="flex items-center gap-2 bg-white border border-deep-navy/10 shadow-sm rounded-full px-5 py-2.5"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ y: -4 }}
+              className="glass rounded-2xl p-5 text-center group"
             >
-              <format.icon size={16} className="text-primary-blue" />
-              <span className="text-sm font-semibold text-deep-navy">{format.label}</span>
+              <div className="icon-pop w-12 h-12 rounded-xl bg-primary-blue/8 flex items-center justify-center mx-auto mb-3 text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-colors">
+                <format.icon size={22} />
+              </div>
+              <p className="text-sm font-bold text-deep-navy leading-snug">{format.label}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
             The People We Support
           </span>
           <h2 className="text-3xl md:text-5xl font-bold">Who We Work With</h2>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
-          {audienceChain.map((stage) => (
-            <div key={stage} className="flex items-center gap-3">
-              <span className="glass px-5 py-2.5 rounded-full text-sm font-semibold text-deep-navy whitespace-nowrap">
-                {stage}
+
+        <div className="relative max-w-3xl mx-auto mb-10">
+          <div className="hidden sm:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-primary-blue/10 via-gold-accent/50 to-primary-blue/10"></div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 relative">
+            {audienceChain.map((stage, index) => (
+              <motion.div
+                key={stage}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="icon-pop w-14 h-14 rounded-full bg-white border-2 border-primary-blue/20 flex items-center justify-center text-primary-blue font-bold mb-3 relative z-10 shadow-sm">
+                  {index + 1}
+                </div>
+                <p className="text-sm font-bold text-deep-navy leading-snug">{stage}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center">
+          <p className="text-xs font-bold text-deep-navy/40 uppercase tracking-widest mb-4">Plus</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {audienceAlso.map((group) => (
+              <span key={group} className="glass px-5 py-2.5 rounded-full text-sm font-semibold text-deep-navy">
+                {group}
               </span>
-              <ArrowRight size={18} className="text-primary-blue/50 shrink-0" />
-            </div>
-          ))}
-          <span className="glass px-5 py-2.5 rounded-full text-sm font-semibold text-deep-navy">
-            {audienceAlso}
-          </span>
+            ))}
+          </div>
         </div>
       </Section>
 

@@ -14,7 +14,7 @@ import {
   ShoppingCart,
   Store,
   GraduationCap,
-  Car,
+  Megaphone,
 } from "lucide-react";
 
 export default function Industries() {
@@ -30,7 +30,7 @@ export default function Industries() {
     { name: "FMCG & Consumer Goods", icon: ShoppingCart },
     { name: "E-commerce & Marketplaces", icon: Store },
     { name: "Education", icon: GraduationCap },
-    { name: "Automotive", icon: Car },
+    { name: "Media & Advertising", icon: Megaphone },
   ];
 
   return (
@@ -41,9 +41,8 @@ export default function Industries() {
         </span>
         <h2 className="text-3xl md:text-5xl font-bold mb-6">Industries We Work With</h2>
         <p className="text-lg text-deep-navy/60 leading-relaxed">
-          Every industry has its own people, business and capability challenges. Our experience
-          across sectors helps us understand the context while building solutions around each
-          organisation.
+          Every industry has its own challenges. We bring cross-sector experience to build
+          the right solution for each one.
         </p>
       </div>
 

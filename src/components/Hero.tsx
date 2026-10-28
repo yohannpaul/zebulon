@@ -357,18 +357,6 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Floating Success Badge */}
-          <motion.div
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -top-10 -right-10 bg-primary-blue/80 backdrop-blur-md border border-white/30 p-6 rounded-full shadow-2xl z-20 hidden lg:block"
-          >
-            <div className="text-center text-white">
-              <p className="text-2xl font-bold">100%</p>
-              <p className="text-[10px] font-bold uppercase tracking-tighter">Success Rate</p>
-            </div>
-          </motion.div>
-
           {/* Decorative shapes */}
           <motion.div
             style={{ x: blob3X, y: blob3Y }}

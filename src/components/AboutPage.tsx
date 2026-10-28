@@ -14,7 +14,7 @@ export default function AboutPage() {
 
   return (
     <div className="pt-20">
-      <Section className="relative bg-bg-light text-deep-navy pt-40 pb-32 md:pt-52 overflow-hidden">
+      <Section className="relative bg-bg-light text-deep-navy pt-40 pb-20 md:pt-52 md:pb-28 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="/images/about-hero-illustration.jpg"
