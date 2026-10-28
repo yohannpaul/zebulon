@@ -1,6 +1,6 @@
 import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
-import { Phone, MapPin, Briefcase, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, MessageCircle, Map, Send } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,42 +26,72 @@ export default function Contact() {
       <div className="grid lg:grid-cols-2 gap-16">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-            Let's Build a Stronger Business Together
+            Let's Build a Stronger Team Together
           </h2>
           <p className="text-lg text-deep-navy/70 mb-10 leading-relaxed">
-            Whether you want to strengthen employee capability, streamline HR operations, improve your digital presence, or support your service teams, Zebulon Consulting is ready to partner with you.
+            Whether you're looking to develop your people, strengthen HR practices or address organisational challenges, we're here to understand your needs and help you find the right solutions.
           </p>
 
-          <div className="space-y-8">
-            <div className="flex items-center gap-5 glass-subtle p-5 rounded-2xl">
-              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue">
+          <div className="space-y-5">
+            <a href="tel:9063673921" className="flex items-center gap-5 glass-subtle p-5 rounded-2xl hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
                 <Phone size={24} />
               </div>
               <div>
-                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Call Us</p>
+                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Call</p>
                 <p className="text-xl font-bold">9063673921</p>
               </div>
-            </div>
+            </a>
+
+            <a href="mailto:info@zebulon.in" className="flex items-center gap-5 glass-subtle p-5 rounded-2xl hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
+                <Mail size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Email</p>
+                <p className="text-xl font-bold">info@zebulon.in</p>
+              </div>
+            </a>
 
             <div className="flex items-center gap-5 glass-subtle p-5 rounded-2xl">
-              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
                 <MapPin size={24} />
               </div>
               <div>
                 <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Location</p>
-                <p className="text-xl font-bold">Hyderabad, Telangana, India</p>
+                <p className="text-xl font-bold">Hyderabad</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-5 glass-subtle p-5 rounded-2xl">
-              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue">
-                <Briefcase size={24} />
+            <a href="https://www.linkedin.com/company/zebulon-in/" target="_blank" rel="noreferrer" className="flex items-center gap-5 glass-subtle p-5 rounded-2xl hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
+                <Linkedin size={24} />
               </div>
               <div>
-                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Industry</p>
-                <p className="text-xl font-bold">Professional Training and Coaching</p>
+                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">LinkedIn</p>
+                <p className="text-xl font-bold">Zebulon Consulting</p>
               </div>
-            </div>
+            </a>
+
+            <a href="https://wa.me/9063673921" target="_blank" rel="noreferrer" className="flex items-center gap-5 glass-subtle p-5 rounded-2xl hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
+                <MessageCircle size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">WhatsApp</p>
+                <p className="text-xl font-bold">9063673921</p>
+              </div>
+            </a>
+
+            <a href="https://maps.app.goo.gl/uLDrdmPFBx8mMv6h8" target="_blank" rel="noreferrer" className="flex items-center gap-5 glass-subtle p-5 rounded-2xl hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 bg-bg-light rounded-2xl flex items-center justify-center shadow-sm text-primary-blue shrink-0">
+                <Map size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-deep-navy/50 uppercase font-bold tracking-wider">Google</p>
+                <p className="text-xl font-bold">View on Maps</p>
+              </div>
+            </a>
           </div>
         </div>
 

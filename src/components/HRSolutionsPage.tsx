@@ -2,6 +2,9 @@ import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
 import SpotlightCard from "./SpotlightCard";
 import GlowCTAButton from "./GlowCTAButton";
+import StatementBlock from "./StatementBlock";
+import StatPanel from "./StatPanel";
+import ProcessSteps from "./ProcessSteps";
 import { motion } from "motion/react";
 import {
   UserSearch,
@@ -22,8 +25,6 @@ import {
   Building,
   Landmark,
   Briefcase,
-  ChevronRight,
-  Quote,
   ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -108,7 +109,7 @@ export default function HRSolutionsPage() {
 
   return (
     <div className="pt-20">
-      <Section className="relative overflow-hidden bg-bg-light pt-40 pb-20 md:pt-52 md:pb-28" backdrop={<GradientBackdrop variant="light" />}>
+      <Section className="relative overflow-hidden bg-bg-light pt-28 pb-16 md:pt-36 md:pb-20" backdrop={<GradientBackdrop variant="light" />}>
         <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <Badge className="h-auto gap-2 pl-3 pr-4 py-2 text-sm font-bold border-primary/20 bg-primary/10 text-primary rounded-full mb-6">
@@ -164,25 +165,21 @@ export default function HRSolutionsPage() {
       </Section>
 
       <Section className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative">
-          <Quote className="absolute -top-8 -left-2 md:-left-12 text-primary-blue/10" size={96} />
-          <div className="relative pl-6 md:pl-10 border-l-4 border-gold-accent">
-            <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
-              Why This Matters
-            </span>
-            <p className="text-2xl md:text-3xl font-bold text-deep-navy leading-snug font-serif mb-6">
-              Good HR practices make a difference.
-            </p>
-            <p className="text-deep-navy/70 leading-relaxed mb-4 max-w-xl">
-              As organisations grow, managing people becomes more complex. Hiring, policies,
-              performance management and employee engagement all need attention.
-            </p>
-            <p className="text-deep-navy/70 leading-relaxed max-w-xl">
-              We work with organisations to strengthen these areas, whether they need support with
-              a specific HR requirement or help setting up and improving their HR function.
-            </p>
-          </div>
-        </div>
+        <StatementBlock
+          eyebrow="Why This Matters"
+          heading="As organisations grow, managing people becomes more complex."
+          side={
+            <StatPanel
+              stats={[
+                { icon: FileText, value: String(services.length), label: "HR Services" },
+                { icon: Handshake, value: String(engagementModels.length), label: "Engagement Models" },
+                { icon: Building, value: String(audiences.length), label: "Who We Support" },
+              ]}
+            />
+          }
+        >
+          <p>We help businesses strengthen HR practices, address specific needs and build better HR processes.</p>
+        </StatementBlock>
       </Section>
 
       <Section className="bg-bg-light">
@@ -231,7 +228,7 @@ export default function HRSolutionsPage() {
           <h2 className="text-3xl md:text-5xl font-bold">HR Support for Different Business Needs</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mx-auto relative z-10">
           {businessNeeds.map((item, index) => (
             <motion.div
               key={item.need}
@@ -239,9 +236,10 @@ export default function HRSolutionsPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="h-full"
             >
-              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-2xl">
-                <div className={`rounded-2xl p-6 flex gap-4 items-start h-full ${index % 2 === 0 ? "bg-primary-blue/[0.04]" : "bg-gold-accent/[0.06]"}`}>
+              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-2xl h-full">
+                <div className={`rounded-2xl p-6 flex gap-4 items-start h-full min-h-[128px] ${index % 2 === 0 ? "bg-primary-blue/[0.04]" : "bg-gold-accent/[0.06]"}`}>
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${index % 2 === 0 ? "bg-primary-blue/15 text-primary-blue" : "bg-gold-accent/20 text-gold-accent"}`}>
                     <ArrowRight size={18} />
                   </div>
@@ -265,31 +263,7 @@ export default function HRSolutionsPage() {
           <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-stretch gap-3 max-w-6xl mx-auto">
-          {workSteps.map((step, index) => (
-            <motion.div
-              key={step.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center lg:flex-col lg:text-center gap-4 flex-1"
-            >
-              <div className="glass p-6 rounded-2xl flex-1 w-full flex lg:flex-col items-center gap-4 lg:gap-0 text-left lg:text-center">
-                <div className="icon-pop w-14 h-14 rounded-full bg-primary-blue/5 flex items-center justify-center lg:mb-4 text-primary-blue shrink-0">
-                  <step.icon size={24} />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-deep-navy mb-1 lg:mb-2">{step.label}</h3>
-                  <p className="text-sm text-deep-navy/60 leading-relaxed">{step.description}</p>
-                </div>
-              </div>
-              {index < workSteps.length - 1 && (
-                <ChevronRight className="text-primary-blue/25 shrink-0 hidden lg:block" size={22} />
-              )}
-            </motion.div>
-          ))}
-        </div>
+        <ProcessSteps steps={workSteps} />
       </Section>
 
       <Section>

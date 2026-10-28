@@ -2,6 +2,9 @@ import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
 import SpotlightCard from "./SpotlightCard";
 import GlowCTAButton from "./GlowCTAButton";
+import StatementBlock from "./StatementBlock";
+import StatPanel from "./StatPanel";
+import ProcessSteps from "./ProcessSteps";
 import { motion } from "motion/react";
 import {
   Compass,
@@ -104,7 +107,7 @@ export default function PeopleAdvisoryPage() {
 
   return (
     <div className="pt-20">
-      <Section className="relative overflow-hidden bg-bg-light pt-40 pb-20 md:pt-52 md:pb-28" backdrop={<GradientBackdrop variant="light" />}>
+      <Section className="relative overflow-hidden bg-bg-light pt-28 pb-16 md:pt-36 md:pb-20" backdrop={<GradientBackdrop variant="light" />}>
         <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <Badge className="h-auto gap-2 pl-3 pr-4 py-2 text-sm font-bold border-primary/20 bg-primary/10 text-primary rounded-full mb-6">
@@ -160,29 +163,25 @@ export default function PeopleAdvisoryPage() {
       </Section>
 
       <Section className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative">
-          <Quote className="absolute -top-8 -left-2 md:-left-12 text-primary-blue/10" size={96} />
-          <div className="relative pl-6 md:pl-10 border-l-4 border-gold-accent">
-            <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
-              Where We Start
-            </span>
-            <p className="text-2xl md:text-3xl font-bold text-deep-navy leading-snug font-serif mb-6">
-              Understanding the problem comes first.
-            </p>
-            <p className="text-deep-navy/70 leading-relaxed mb-4 max-w-xl">
-              Not every people challenge needs another training programme, a new HR policy or a
-              change in process.
-            </p>
-            <p className="text-deep-navy/70 leading-relaxed mb-4 max-w-xl">
-              Sometimes the real issue is unclear expectations, leadership behaviour, team dynamics
-              or gaps in capability.
-            </p>
-            <p className="text-deep-navy/70 leading-relaxed max-w-xl">
-              We help organisations understand what's happening, identify the underlying causes and
-              decide what needs to be done.
-            </p>
-          </div>
-        </div>
+        <StatementBlock
+          eyebrow="Where We Start"
+          heading="Better People Decisions. Stronger Organisations."
+          side={
+            <StatPanel
+              stats={[
+                { icon: Compass, value: String(services.length), label: "Advisory Services" },
+                { icon: Handshake, value: String(engagementModels.length), label: "Engagement Models" },
+                { icon: Briefcase, value: String(audiences.length), label: "Who We Support" },
+              ]}
+            />
+          }
+        >
+          <p>
+            Not every people challenge needs training or a new HR policy. Sometimes the issue lies in
+            leadership, team dynamics or capability gaps.
+          </p>
+          <p>We help organisations identify the real challenges and find practical ways to address them.</p>
+        </StatementBlock>
       </Section>
 
       <Section dark className="relative overflow-hidden">
@@ -257,29 +256,7 @@ export default function PeopleAdvisoryPage() {
           <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
         </div>
 
-        <div className="max-w-3xl mx-auto relative">
-          <div className="hidden md:block absolute left-[27px] top-4 bottom-4 w-px bg-primary-blue/15"></div>
-          <div className="space-y-6">
-            {workSteps.map((step, index) => (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex gap-5 md:gap-6 items-start group"
-              >
-                <div className="icon-pop w-14 h-14 rounded-full bg-white border-2 border-primary-blue/15 flex items-center justify-center text-primary-blue shrink-0 relative z-10 shadow-sm group-hover:border-gold-accent group-hover:text-gold-accent transition-colors">
-                  <step.icon size={22} />
-                </div>
-                <div className="pt-2">
-                  <h3 className="text-base font-bold text-deep-navy mb-1">{step.label}</h3>
-                  <p className="text-sm text-deep-navy/60 leading-relaxed">{step.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <ProcessSteps steps={workSteps} />
       </Section>
 
       <Section className="bg-bg-light">

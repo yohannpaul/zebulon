@@ -18,10 +18,10 @@ export default function Section({ children, className = "", id, dark = false, ba
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.7, ease: EASE_PREMIUM }}
-      className={`relative py-14 md:py-20 px-6 md:px-12 lg:px-24 ${dark ? "bg-deep-navy text-white" : ""} ${backdrop ? "overflow-hidden" : ""} ${className}`}
+      className={`relative py-14 md:py-20 px-6 md:px-10 lg:px-16 ${dark ? "bg-deep-navy text-white" : ""} ${backdrop ? "overflow-hidden" : ""} ${className}`}
     >
       {backdrop}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1400px] mx-auto">
         {children}
       </div>
     </motion.section>

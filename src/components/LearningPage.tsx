@@ -1,9 +1,11 @@
-import { useRef } from "react";
 import Section from "./Section";
 import GradientBackdrop from "./GradientBackdrop";
 import SpotlightCard from "./SpotlightCard";
 import GlowCTAButton from "./GlowCTAButton";
-import { motion, useScroll } from "motion/react";
+import StatementBlock from "./StatementBlock";
+import StatPanel from "./StatPanel";
+import ProcessSteps from "./ProcessSteps";
+import { motion } from "motion/react";
 import {
   GraduationCap,
   Users,
@@ -26,7 +28,7 @@ import {
   Laptop,
   Layers,
   UserCheck,
-  Quote,
+  Award,
   ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -117,23 +119,23 @@ export default function LearningPage() {
     { label: "Virtual", icon: Laptop },
     { label: "Blended", icon: Layers },
     { label: "Workshops", icon: Presentation },
-    { label: "Learning Journeys", icon: Route },
     { label: "1:1", icon: UserCheck },
     { label: "Small Group Coaching", icon: Users },
   ];
 
-  const audienceChain = ["Individual Contributors", "New Managers", "Experienced Managers", "Senior Leaders"];
-  const audienceAlso = ["Sales Teams", "Customer facing teams", "Leadership Teams"];
-
-  const buildRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: buildProgress } = useScroll({
-    target: buildRef,
-    offset: ["start center", "end center"],
-  });
+  const audiences = [
+    { icon: UserCheck, title: "Individual Contributors", description: "Building skills and confidence early in their careers." },
+    { icon: Users, title: "New Managers", description: "Developing the fundamentals of managing people and performance." },
+    { icon: Target, title: "Experienced Managers", description: "Strengthening leadership range as responsibilities grow." },
+    { icon: Award, title: "Senior Leaders", description: "Sharpening strategic and organisational leadership." },
+    { icon: TrendingUp, title: "Sales Teams", description: "Building selling, negotiation and client conversation skills." },
+    { icon: Headset, title: "Customer-Facing Teams", description: "Strengthening service, communication and problem-solving skills." },
+    { icon: UsersRound, title: "Leadership Teams", description: "Aligning leadership groups around shared ways of working." },
+  ];
 
   return (
     <div className="pt-20">
-      <Section className="relative overflow-hidden bg-bg-light pt-40 pb-20 md:pt-52 md:pb-28" backdrop={<GradientBackdrop variant="light" />}>
+      <Section className="relative overflow-hidden bg-bg-light pt-28 pb-16 md:pt-36 md:pb-20" backdrop={<GradientBackdrop variant="light" />}>
         <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <Badge className="h-auto gap-2 pl-3 pr-4 py-2 text-sm font-bold border-primary/20 bg-primary/10 text-primary rounded-full mb-6">
@@ -189,22 +191,21 @@ export default function LearningPage() {
       </Section>
 
       <Section className="relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative">
-          <Quote className="absolute -top-8 -left-2 md:-left-12 text-primary-blue/10" size={96} />
-          <div className="relative pl-6 md:pl-10 border-l-4 border-gold-accent">
-            <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
-              Our Learning Philosophy
-            </span>
-            <p className="text-2xl md:text-4xl font-bold text-deep-navy leading-snug font-serif">
-              We don't start with a training topic.
-              <br />
-              We start with what needs to change.
-            </p>
-            <p className="mt-6 text-deep-navy/60 text-base md:text-lg max-w-xl">
-              Every learning intervention we design starts with your context, not a course catalogue.
-            </p>
-          </div>
-        </div>
+        <StatementBlock
+          eyebrow="Our Learning Philosophy"
+          heading="We don't start with a training topic. We start with what needs to change."
+          side={
+            <StatPanel
+              stats={[
+                { icon: GraduationCap, value: String(solutions.length), label: "Learning Solutions" },
+                { icon: Target, value: String(expertiseAreas.length), label: "Focus Areas" },
+                { icon: Layers, value: String(formats.length), label: "Delivery Formats" },
+              ]}
+            />
+          }
+        >
+          <p>Every learning intervention we design starts with your context, not a course catalogue.</p>
+        </StatementBlock>
       </Section>
 
       <Section>
@@ -215,7 +216,7 @@ export default function LearningPage() {
           <h2 className="text-3xl md:text-5xl font-bold">Solutions</h2>
         </div>
 
-        <div className="max-w-4xl mx-auto divide-y divide-deep-navy/10">
+        <div className="max-w-5xl mx-auto divide-y divide-deep-navy/10">
           {solutions.map((item, index) => (
             <motion.div
               key={item.title}
@@ -298,32 +299,7 @@ export default function LearningPage() {
           <div className="w-20 h-1.5 bg-gold-accent mx-auto"></div>
         </div>
 
-        <div ref={buildRef} className="relative max-w-5xl mx-auto">
-          <div className="hidden md:block absolute left-0 right-0 top-7 h-px bg-primary-blue/15"></div>
-          <motion.div
-            style={{ scaleX: buildProgress, transformOrigin: "left" }}
-            className="hidden md:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-primary-blue to-gold-accent"
-          ></motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-4 relative">
-            {buildSteps.map((step, index) => (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center group"
-              >
-                <div className="icon-pop w-14 h-14 rounded-full bg-white border-2 border-primary-blue/20 flex items-center justify-center text-primary-blue mb-4 relative z-10 shadow-sm group-hover:border-gold-accent group-hover:text-gold-accent transition-colors">
-                  <step.icon size={22} />
-                </div>
-                <h3 className="text-base font-bold text-deep-navy mb-1.5">{step.label}</h3>
-                <p className="text-sm text-deep-navy/60 leading-relaxed">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <ProcessSteps steps={buildSteps} />
       </Section>
 
       <Section className="bg-bg-light">
@@ -333,7 +309,7 @@ export default function LearningPage() {
           </span>
           <h2 className="text-3xl md:text-5xl font-bold">Learning Formats</h2>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto mb-16">
           {formats.map((format, index) => (
             <motion.div
               key={format.label}
@@ -352,43 +328,34 @@ export default function LearningPage() {
           ))}
         </div>
 
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <span className="text-primary-blue font-bold uppercase tracking-widest text-sm mb-4 block">
             The People We Support
           </span>
           <h2 className="text-3xl md:text-5xl font-bold">Who We Work With</h2>
         </div>
 
-        <div className="relative max-w-3xl mx-auto mb-10">
-          <div className="hidden sm:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-primary-blue/10 via-gold-accent/50 to-primary-blue/10"></div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 relative">
-            {audienceChain.map((stage, index) => (
-              <motion.div
-                key={stage}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="icon-pop w-14 h-14 rounded-full bg-white border-2 border-primary-blue/20 flex items-center justify-center text-primary-blue font-bold mb-3 relative z-10 shadow-sm">
-                  {index + 1}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {audiences.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.07 }}
+            >
+              <SpotlightCard color={index % 2 === 0 ? "blue" : "gold"} className="rounded-2xl h-full">
+                <div className="glass rounded-2xl p-7 h-full relative overflow-hidden group">
+                  <item.icon className="absolute -right-4 -bottom-4 text-primary-blue/[0.06] group-hover:text-primary-blue/10 transition-colors" size={96} />
+                  <div className="icon-pop w-14 h-14 rounded-2xl bg-primary-blue flex items-center justify-center text-white shadow-md mb-5 relative z-10 group-hover:bg-gold-accent transition-colors duration-300">
+                    <item.icon size={24} />
+                  </div>
+                  <h3 className="text-base font-bold text-deep-navy mb-2 relative z-10">{item.title}</h3>
+                  <p className="text-sm text-deep-navy/60 leading-relaxed relative z-10">{item.description}</p>
                 </div>
-                <p className="text-sm font-bold text-deep-navy leading-snug">{stage}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="text-center">
-          <p className="text-xs font-bold text-deep-navy/40 uppercase tracking-widest mb-4">Plus</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {audienceAlso.map((group) => (
-              <span key={group} className="glass px-5 py-2.5 rounded-full text-sm font-semibold text-deep-navy">
-                {group}
-              </span>
-            ))}
-          </div>
+              </SpotlightCard>
+            </motion.div>
+          ))}
         </div>
       </Section>
 
